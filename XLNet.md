@@ -33,6 +33,7 @@ ex) x1, x2, x3, x4에서 permutation의 경우의수 4!(-> 이것을 다 활용�
 (직관적으로 model parameters가 모든 factorization order서 공유된다면, 모든 위치에서의 모든 방향의 정보를 학습할 수 있게 된다 - paper 曰)
 그러나 permutation도 문제점이 존재하는데,
 ![](https://github.com/Chuck2Win/Paper_Review/blob/master/image/CodeCogsEqn%20(1).gif)
+
 we sample factorization order z.
 이렇게 AR방식으로 하게 되면, 독립성 가정도 필할 수 있고, Pretrain - Finetunning 불 일치 문제도 해결 可
 
@@ -49,11 +50,14 @@ t-1 까지의 token들로 t 번째 token을 예측함.
 
 ## 3. Two Stream Self Attention for Target-Aware Representations
 ![Two Stream Self Attention](https://github.com/Chuck2Win/Paper_Review/blob/master/image/3.png)
+
 ![최종목적식](https://github.com/Chuck2Win/Paper_Review/blob/master/image/4.png)
+
 이에 대해서 XLNet은 x_t를 embedding 하기 위해서,
 Content Representation for x_z(t) (h_theta(x_z<t)) : content information from x_z(1)~x_z(t) | Position from x_z(1) to x_z(t)
 <- Content stream attention (기존의 Transformer의 decoder와 동일)
 ![Content](https://github.com/Chuck2Win/Paper_Review/blob/master/image/6.png)
+
 Query Representation for x_z(t) (g_theta(x_z<t,zt)) : content information from x_z(1)~x_z(t-1) | Position x_z(t) only (x_z(t)의 content는 접근할 수 없음)
 <- Query stream attention 
 ![Query](https://github.com/Chuck2Win/Paper_Review/blob/master/image/7.png)
@@ -92,6 +96,7 @@ permutation order
 ### Partial Prediction
 장황하게 표현했지만, optimization difficulty(memory와 speed를 위해서), factorization order에서 마지막 tokens만을 예측함
 ![partial prediction](https://github.com/Chuck2Win/Paper_Review/blob/master/image/5.png)
+
 예를 들어서 표현하면, factorization order가 x3->x2->x1->x4이면 x1,x4만을 예측함.
 여기서 hyper parameter K는 1/K tokens이 예측을 위해서 선택된 것이라고 이해하면 된다.
 
@@ -101,7 +106,9 @@ permutation order
 1) relative positional encoding 
 [Self-Attention with Relative Position Representation-2018에 처음 나온 idea]
 ![relative positional encoding](https://github.com/Chuck2Win/Paper_Review/blob/master/image/8.png)
+
 ![relative positional encoding](https://github.com/Chuck2Win/Paper_Review/blob/master/image/9.png)
+
 두번째 내가 수기로 정리한 것을 보면, 사실상 이 논문의 핵심과 relative positional encoding은 정리 완료(물론 T5에선 어떤 식으로 하나 알아봐야 할 것 같다)
 
 2) segment recurrence mechanism - 명확히 이해는 되지 않았다. 논의가 필요할 듯.
@@ -114,6 +121,7 @@ BERT에서는 segment encoding을 활용했는데, XLNet은 Relative segment enc
 i,j position이 주어졌다면, i와 j가 같은 segment이면 sij=s+, 다르면 sij=s- 
 attention weights(내가 수업시간에 배운 용어로는 attention distribution : 즉 softmax를 취한 경우) 
 ![relative segment_encoding](https://github.com/Chuck2Win/Paper_Review/blob/master/image/11.png)
+
 이 때 q_i는 query vector이고, b는 learnable head specific bias vector (head 마다 다른 bias를 부여하네)
 이제 이것을 기존의 normal attention weight에 더한다.
 relative segment encoding의 장점은, 일반화 능력이 좋고, finetuning시 2개 이상의 segment가 있을 수 있 때에도 적용이 가능
