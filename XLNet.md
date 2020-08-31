@@ -1,5 +1,3 @@
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
 # XLNet : Generalized Autoregressive Pretraining for Language Understanding
 
 ## 1. Point  
@@ -39,4 +37,12 @@ t-1 까지의 token들로 t 번째 token을 예측함.
 
 $$
 \alpha
+$$
+
+$$
+\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+\frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\
+\frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0 \\
+\end{vmatrix}
 $$
