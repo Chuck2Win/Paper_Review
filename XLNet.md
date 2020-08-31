@@ -32,17 +32,5 @@ ex) x1, x2, x3, x4에서 permutation의 경우의수 4!(-> 이것을 다 활용�
 그러나 permutation도 문제점이 존재하는데,
 
 t-1 까지의 token들로 t 번째 token을 예측함.
-예를 들어 설명하면, x4,x2,x3,x1의 것을 sampling했다고 하면, ![$\p(x_z3|x_z1,x_z2)$](https://latex.codecogs.com/eqneditor/editor.php)
-![깃허브 감성기호](C:/Users/UNIMAX/Downloads/CodeCogsEqn.gif)
+예를 들어 설명하면, x4,x2,x3,x1의 것을 sampling했다고 하면, ![$\p(x_z3|x_z1,x_z2)$](https://github.com/Chuck2Win/Paper_Review/blob/master/image/CodeCogsEqn.gif)
 
-$$
-\alpha
-$$
-
-$$
-\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
-\mathbf{i} & \mathbf{j} & \mathbf{k} \\
-\frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\
-\frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0 \\
-\end{vmatrix}
-$$
