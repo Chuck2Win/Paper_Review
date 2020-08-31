@@ -30,6 +30,6 @@ ex) x1, x2, x3, x4에서 permutation의 경우의수 4!(-> 이것을 다 활용�
 
 즉 permutation을 하게 되면, x3에 대한 양방향의 정보가 다 들어오게 된다. 그래서 bidirectional 문제 해결 완료
 그러나 permutation도 문제점이 존재하는데,
-![$\max$](http://latex.codecogs.com/gif.latex?Concentration%3D%5Cfrac%7BTotalTemplate%7D%7BTotalVolume%7D)
+
 t-1 까지의 token들로 t 번째 token을 예측함.
-예를 들어 설명하면, x4,x2,x3,x1의 것을 sampling했다고 하면, ![$\p(x_z3|x_z1,x_z2)$](http://latex.codecogs.com/gif.latex?Concentration%3D%5Cfrac%7BTotalTemplate%7D%7BTotalVolume%7D)
+예를 들어 설명하면, x4,x2,x3,x1의 것을 sampling했다고 하면, ![$\p(x_z3|x_z1,x_z2)$](C:\Users\UNIMAX\Downloads\CodeCogsEqn.gif)
