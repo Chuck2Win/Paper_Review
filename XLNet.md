@@ -9,7 +9,7 @@ Language Model은 크게 AR model, AE model이 있음 ( AR model은 XLNet, GPT �
 ** Forward, backward를 동시에 고려하지 못한다.
 
 * AE Model : Reconstruct original data from corrupted input(<-[MASK]가 있는 경우)
-** 동시에 고려 가능, 그러나 $P([MASK_i,MASK_l]|unmasked token)=P([MASK_i]|unmasked token) * P([MASK_l]|unmasked token)$ 즉 독립 가정, pretraining과 inference(finetunning)시 discrepancy 문제
+** 동시에 고려 가능, 그러나 $$ P([MASK_i,MASK_l]|unmasked token)=P([MASK_i]|unmasked token) * P([MASK_l]|unmasked token) $$ 즉 독립 가정, pretraining과 inference(finetunning)시 discrepancy 문제
 
 XLNet은 AR Model과 AE Model의 장점을 합친 버전임.
 bidirectional 가능, discrepancy 해결, 독립성 해결
