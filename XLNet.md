@@ -39,7 +39,7 @@ t-1 까지의 token들로 t 번째 token을 예측함.
 기존 transformer가 못하는 사항
 1. t번째 token을 예측하는데에 있어서, model은 단순히 t번째 token의 위치만을 고려해야한다.(content은 알면 안된다)
 2. 그리고 t번째 token을 예측할 때에 model은 t번째 토큰 이전의 모든 content를 encode 해야한다.
-다시 예를 들어서 설명하면, | x1 | x2 | x3 | x4 | 라 할 때에, x3을 예측하기 위해서는 x3의 내용을 모르고 위치만을 고려해야 하며, x3을 예측할 때에는 x1,x2의 content를 encode해야한다는 소리.
+다시 예를 들어서 설명하면, x1,x2,x3,x4라 할 때에, x3을 예측하기 위해서는 x3의 내용을 모르고 위치만을 고려해야 하며, x3을 예측할 때에는 x1,x2의 content를 encode해야한다는 소리.
 
 이에 대해서 XLNet은 x_t를 embedding 하기 위해서,
 Content Representation for x_z(t) : content information from x_z(1)~x_z(t) | Position from x_z(1) to x_z(t)
@@ -48,10 +48,13 @@ Query Representation for x_z(t) : content information from x_z(1)~x_z(t-1) | Pos
 <- Query stream attention 
 
 example 
-input sequence의 order | x1 | x2 | x3 | x4 |
-permutation order | x3 | x2 | x4 | x1 |
+input sequence의 order 
+| x1 | x2 | x3 | x4 |
+permutation order 
+| x3 | x2 | x4 | x1 |
 
 - Content stream attention에서의 mask
+
 | | x1 | x2 | x3 | x4 |
 | x1 | | | | |
 | x2 | x |  | | x |
@@ -59,6 +62,7 @@ permutation order | x3 | x2 | x4 | x1 |
 | x4 | x | | | |
 
 - Query stream attention에서의 mask : 자기 자신의 위치와 이전까지의 token의 내용
+
 | | x1 | x2 | x3 | x4 |
 | x1 | x | | | |
 | x2 | x | x  | | x |
