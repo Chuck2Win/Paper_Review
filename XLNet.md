@@ -9,7 +9,7 @@ Language Model은 크게 AR model, AE model이 있음 ( AR model은 XLNet, GPT �
 ** Forward, backward를 동시에 고려하지 못한다.
 
 * AE Model : Reconstruct original data from corrupted input(<-[MASK]가 있는 경우)
-** 동시에 고려 가능, 그러나 $$P([MASK_i,MASK_l]|unmasked token)=P([MASK_i]|unmasked token) * P([MASK_l]|unmasked token)$$ 즉 독립 가정, pretraining과 inference(finetunning)시 discrepancy 문제
+** 동시에 고려 가능, 그러나 P([MASK_i,MASK_l]|unmasked token)=P([MASK_i]|unmasked token) * P([MASK_l]|unmasked token) 즉 독립 가정, pretraining과 inference(finetunning)시 discrepancy 문제
 
 XLNet은 AR Model과 AE Model의 장점을 합친 버전임.
 bidirectional 가능, discrepancy 해결, 독립성 해결
@@ -48,12 +48,15 @@ Query Representation for x_z(t) : content information from x_z(1)~x_z(t-1) | Pos
 example 
 input sequence의 order 
 | x1 | x2 | x3 | x4 |
+| ---          | ---          | ---          | ---          
 permutation order 
 | x3 | x2 | x4 | x1 |
+| ---          | ---          | ---          | ---          
 
 - Content stream attention에서의 mask
 
 | | x1 | x2 | x3 | x4 |
+| ---          | ---          | ---          | ---          | ---          
 | x1 | | | | |
 | x2 | x |  | | x |
 | x3 | x | x | | x |
@@ -62,6 +65,7 @@ permutation order
 - Query stream attention에서의 mask : 자기 자신의 위치와 이전까지의 token의 내용
 
 | | x1 | x2 | x3 | x4 |
+| ---          | ---          | ---          | ---          | ---          
 | x1 | x | | | |
 | x2 | x | x  | | x |
 | x3 | x | x | x | x |
