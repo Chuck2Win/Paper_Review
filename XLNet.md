@@ -22,7 +22,11 @@ ex) x1, x2, x3, x4에서 permutation의 경우의수 4!(-> 이것을 다 활용�
  . x3 . .
 . . x3 .
 . . . x3
+
+| 첫번째 글머리 | 두번째 글머리 | 세번째 글머리 | 네번째 글머리 |  
+| ---          | ---          | :---:        | ---:         |  
+| 첫번째 열의 내용 | 두번째열의 내용 | :가운데정렬: | 오른쪽정렬: |  
 즉 permutation을 하게 되면, x3에 대한 양방향의 정보가 다 들어오게 된다. 그래서 bidirectional 문제 해결 완료
 그러나 permutation도 문제점이 존재하는데,
-$$ max\theta\E_z~z_t[\sum{t,T}]
+![max\theta\E_z~z_t[\sum{t,T}](http://latex.codecogs.com/gif.latex?Concentration%3D%5Cfrac%7BTotalTemplate%7D%7BTotalVolume%7D)
 
