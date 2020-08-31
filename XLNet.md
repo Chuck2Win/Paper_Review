@@ -33,3 +33,4 @@ ex) x1, x2, x3, x4에서 permutation의 경우의수 4!(-> 이것을 다 활용�
 
 t-1 까지의 token들로 t 번째 token을 예측함.
 예를 들어 설명하면, x4,x2,x3,x1의 것을 sampling했다고 하면, ![$\p(x_z3|x_z1,x_z2)$](C:\Users\UNIMAX\Downloads\CodeCogsEqn.gif)
+![깃허브 감성기호](C:/Users/UNIMAX/Downloads/CodeCogsEqn.gif)
