@@ -18,11 +18,11 @@ bidirectional 가능, discrepancy 해결, 독립성 해결
 
 ex) x1, x2, x3, x4에서 permutation의 경우의수 4!(-> 이것을 다 활용하는 것이 아니라, random sampling 함)  
 이 때 x3를 위주로 살펴본다면
-x3 # # # 
-# x3 # #
-# # x3 #
-# # # x3
+ x3 . . . 
+ . x3 . .
+. . x3 .
+. . . x3
 즉 permutation을 하게 되면, x3에 대한 양방향의 정보가 다 들어오게 된다. 그래서 bidirectional 문제 해결 완료
-![equation]
-
+그러나 permutation도 문제점이 존재하는데,
+$$ max\theta\E_z~z_t[\sum{t,T}]
 
