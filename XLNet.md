@@ -33,19 +33,18 @@ ex) x1, x2, x3, x4에서 permutation의 경우의수 4!(-> 이것을 다 활용�
 
 즉 permutation을 하게 되면, x3에 대한 양방향의 정보가 다 들어오게 된다. 그래서 bidirectional 문제 해결 완료
 (직관적으로 model parameters가 모든 factorization order서 공유된다면, 모든 위치에서의 모든 방향의 정보를 학습할 수 있게 된다 - paper 曰)
-그러나 permutation도 문제점이 존재하는데,
 ![](https://github.com/Chuck2Win/Paper_Review/blob/master/image/CodeCogsEqn%20(1).gif)
 
 we sample factorization order z.
-이렇게 AR방식으로 하게 되면, 독립성 가정도 필할 수 있고, Pretrain - Finetunning 불 일치 문제도 해결 可
+이렇게 AR방식으로 하게 되면, 독립성 가정도 피할 수 있고, Pretrain - Finetunning 불 일치 문제도 해결 可
 
 ### Remark on Permutation
 original sequence order는 유지(positional encoding 활용)+attention mask를 활용해서 factorization order를 표현 
 
 t-1 까지의 token들로 t 번째 token을 예측함.
-예를 들어 설명하면, x4,x2,x3,x1의 것을 sampling했다고 하면, ![$\p(x_z3|x_z1,x_z2)$](https://github.com/Chuck2Win/Paper_Review/blob/master/image/CodeCogsEqn.gif)
+예를 들어 설명하면, x1,x2,x3,x4의 것을 sampling했다고 하고, x3을 예측한다고 가정하면, ![$\p(x_z3|x_z1,x_z2)$](https://github.com/Chuck2Win/Paper_Review/blob/master/image/CodeCogsEqn.gif)
 
-기존 transformer가 못하는 사항
+기존 transformer가 못하는 사항 - [MASK]를 표현할 수 가 없다.
 1. t번째 token을 예측하는데에 있어서, model은 단순히 t번째 token의 위치만을 고려해야한다.(content은 알면 안된다)
 2. 그리고 t번째 token을 예측할 때에 model은 t번째 토큰 이전의 모든 content를 encode 해야한다.
 다시 예를 들어서 설명하면, x1,x2,x3,x4라 할 때에, x3을 예측하기 위해서는 x3의 내용을 모르고 위치만을 고려해야 하며, x3을 예측할 때에는 x1,x2의 content를 encode해야한다는 소리.
