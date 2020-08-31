@@ -7,10 +7,12 @@ Language Model은 크게 AR model, AE model이 있음 ( AR model은 XLNet, GPT �
 
 * AR Model
 ![AR](https://github.com/Chuck2Win/Paper_Review/blob/master/image/1.png)
+
 ** Forward, backward를 동시에 고려하지 못한다. ( multi layer LM이고, bidirectional이라 하더라도 다음 layer에 전달할 때에 그냥 concat하는 수준이므로 )
 
 * AE Model : Reconstruct original data from corrupted input(<-[MASK]가 있는 경우)
 ![AR](https://github.com/Chuck2Win/Paper_Review/blob/master/image/2.png)
+
 corrupted version : x_hat / masked token : x_bar / m_t=1은 x_t가 masked 된 것을 의미함.
 ** 동시에 고려 가능, 그러나 P([MASK_i,MASK_l]|unmasked token)=P([MASK_i]|unmasked token) * P([MASK_l]|unmasked token) 즉 독립 가정, pretraining과 inference(finetunning)시 discrepancy 문제
 
@@ -130,6 +132,7 @@ relative segment encoding의 장점은, 일반화 능력이 좋고, finetuning�
 # BERT ways
 nn.Embedding(3,128,padding_idx=2) # segment가 A이면 1일테고, 그에 대응되는 벡터값 128개가 있을것이고
 ```
+https://colab.research.google.com/drive/1Z6XCm09aKrJR-QVZ2zJfwVkDf-qarUyX?hl=ko#scrollTo=9FaXH2iueMqh <- 작업 중..
 
 
 
