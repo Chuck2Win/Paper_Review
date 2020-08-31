@@ -49,9 +49,11 @@ example
 input sequence의 order 
 | x1 | x2 | x3 | x4 |
 | ---          | ---          | ---          | ---          
+
 permutation order 
 | x3 | x2 | x4 | x1 |
 | ---          | ---          | ---          | ---          
+
 
 - Content stream attention에서의 mask
 
@@ -62,6 +64,7 @@ permutation order
 | x3 | x | x | | x |
 | x4 | x | | | |
 
+
 - Query stream attention에서의 mask : 자기 자신의 위치와 이전까지의 token의 내용
 
 | | x1 | x2 | x3 | x4 |
@@ -70,6 +73,7 @@ permutation order
 | x2 | x | x  | | x |
 | x3 | x | x | x | x |
 | x4 | x | | | x |
+
 ? 그러면 positional encoding할 때에 자기 자신의 위치만 살려서 더해주고, 나머지 embedding(token embedding)만 mask를 씌우나?
 
 
