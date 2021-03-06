@@ -4,23 +4,22 @@
 
 https://github.com/pytorch/fairseq/blob/master/fairseq/models/bart/model.py 
 
-![contextual word embedding](https://github.com/Chuck2Win/Paper_Review/blob/master/image/diagram.png)
+![contextual word embedding](https://github.com/Chuck2Win/Paper_Review/blob/master/image/diagram.png)  
 
-BART - Bidirectional, Auto Regressive Transformers/
 
-Denosing Autoencoder
+Denosing Autoencoder  
 
-seq2seq 모델이라고 일컬음.(XLNet에서)
+seq2seq 모델이라고 일컬음.(XLNet에서)  
 
 - 창원의 정리
 
   | Model | Transformer         | Bi directional                | 비고          |
   | ----- | ------------------- | ----------------------------- | ------------- |
-  | BERT  | Transformer Encoder | O                             | MASK LM + NSP |
-  | GPT   | Transformer Decoder | X                             | LM            |
-  | BART  | Transformer         | Encoder부 : O, Decoder 부 : X | MASK LM + LM  |
+  | BERT  | Transformer Encoder | O                             | MASK LM + NSP, AE |
+  | GPT   | Transformer Decoder | X                             | LM, AR            |
+  | BART  | Transformer         | Encoder부 : O, Decoder 부 : X | MASK LM + LM, Seq2Seq  |
 
-  ![BART 비교](H:\논문\BART\BART 비교.png)
+  ![BART 비교](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/BART%20%EB%B9%84%EA%B5%90.png)
 
 Encoder의 input : Corrupted Text(Text infilling & Sentence Permutation)
 
@@ -30,7 +29,7 @@ Decoder의 input :  Original Text
 
 
 
-![3](H:\논문\BART\3.png)
+![3](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/3.png)
 
 - 그림에서 .이 문장이 끝나는 지점.
 
@@ -202,13 +201,13 @@ BART maps a <u>corrupted document</u> to the <u>original document</u>.
 
 Linear 층을 없애서 BERT에 비해서 10% 정도만 parameter 증가.
 
-![2](H:\논문\BART\2.png)
+![2](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/2.png)
 
 
 
 Corruption for text. - 추후 Sentence Permutation과 Text infilling이 결과가 제일 좋았음.
 
-![image-20210303101218454](C:\Users\IDSL\AppData\Roaming\Typora\typora-user-images\image-20210303101218454.png)
+![image-20210303101218454](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/1.png)
 
 [ Text Infilling ]
 
