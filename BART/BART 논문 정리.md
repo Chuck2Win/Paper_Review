@@ -207,11 +207,9 @@ Linear 층을 없애서 BERT에 비해서 10% 정도만 parameter 증가.
 
 Corruption for text. - 추후 Sentence Permutation과 Text infilling이 결과가 제일 좋았음.
 
-![image-20210303101218454](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/1.png)
 
-[ Text Infilling ]
 
-text span을 [MASK]로 대체 . 이 때 Text span은 말 그대로 text의 선형 결합인 것이고. 이 때 span의 길이는 포아송($\lambda$=3)에서 sampling함.
+text span을 [MASK]로 대체 . 이 때 Text span은 말 그대로 text의 선형 결합인 것이고. 이 때 span의 길이는 포아송(lambda=3)에서 sampling함.
 
 - 모델이 얼마나 span으로 부터 얼마나 많은 토큰이 사라졌느냐를 학습하게 함.(내 생각엔, span의 길이와 그 내용을 유추하게끔 학습할듯)
 
@@ -221,7 +219,7 @@ text span을 [MASK]로 대체 . 이 때 Text span은 말 그대로 text의 선�
 
 ## Machine Translation(신선)
 
-![4](H:\논문\BART\4.png)
+![4](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/4.png)
 
 Pretrained 된 BART 모델은 영어를 학습했을터, 논문에서 마냥 체코어를 번역하는 Task를 진행한다면, BART의 Encoder부에 Randomly initiallized Encoder를 추가(Randomized Word Embedding - (역할 : 체코어를 영어로 매칭))
 
