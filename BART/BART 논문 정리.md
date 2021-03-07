@@ -64,6 +64,8 @@ text span을 [MASK]로 대체 . 이 때 Text span은 말 그대로 text의 선�
 
 # Fine tunning
 
+![5](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/5.png)
+
 ## Machine Translation(신선)
 
 ![4](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/4.png)
@@ -73,15 +75,22 @@ Pretrained 된 BART 모델은 영어를 학습했을터, 논문에서 마냥 체
 학습 절차
 
 - <u>추가된 Encoder</u>와 <u>BART Positional embedding</u>, 그리고 <u>self attention input projection matrix of BART's encoder first layer</u>만 학습
-- 후에 모든 파라미터를 조금만 학습.
+- 후에 모든 파라미터를 조금만 학습.  
+- (여기에서 말하는 Positional embedding은 )
+```
+```
 
-# Comparison with other models
-Language Model: GPT  
-Permuted Language Model: XL-Net  
-Masked Language Model: BERT  
+# Comparison with other models  
+1M step 학습 + data : combinations of books & Wikipedia data.  
+Language Model: GPT(cross attention이 없는 BART의 Decoder와 유사.)    
+Permuted Language Model: XL-Net(relative positional embedding 과 attention across segments를 활용 x)    
+Masked Language Model: BERT(15% Mask 씌우고, 각각의 MASK를 independent하게 예측하게끔 함)    
 Multitask Masked Language Model: UniLM  
 Masked Seq-to-Seq: MASS  
-
+- Permuted Language LM, Masked LM, Multitask Masked LM -> 2 stream attention을 활용함.(XLNET은 알겠다만, BERT는?)      
+(comment : UniLM과 MASS에 대해선 컨셉은 파악해야겠음)  
+실험 방식)  
+1) 
 # Task 
 - SQuAD : Extractive QA task  
 - MNLI : Bitext Classification task (두 문장의 의미적인 관계 분류)  - ELI5 : Abstractive summary task
