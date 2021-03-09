@@ -2,7 +2,9 @@
 
 코드 참조
 
-https://github.com/pytorch/fairseq/blob/master/fairseq/models/bart/model.py 
+https://github.com/pytorch/fairseq/blob/master/fairseq/models/bart/model.py  
+https://huggingface.co/transformers/model_doc/bart.html  
+개인적으로 huggingface의 그것이 더 가독성이 좋은듯.  
 
 ![contextual word embedding](https://github.com/Chuck2Win/Paper_Review/blob/master/image/diagram.png)  
 
