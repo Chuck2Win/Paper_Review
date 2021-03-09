@@ -25,7 +25,7 @@ seq2seq 모델이라고 일컬음.(XLNet에서)
 
 Encoder의 input : Corrupted Text(Text infilling & Sentence Permutation)
 
-Text infilling은 각각의 결합을 [MASK]의 sequence로 교체해줌(abc -> [MASK] [MASK] [MASK]) : 얼마나 많은 토큰이 mask로 바뀌었는지 예측하게끔.
+Text infilling은 각각의 결합을 [MASK]로 교체해줌(abc -> [MASK]) : 얼마나 많은 토큰이 mask로 바뀌었는지 예측하게함.  
 
 Decoder의 input :  Original Text
 
@@ -65,9 +65,6 @@ text span을 [MASK]로 대체 . 이 때 Text span은 말 그대로 text의 선�
 
 
 # Fine tunning
-
-![5](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/5.png)
-
 ## Machine Translation(신선)
 
 ![4](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/4.png)
@@ -79,7 +76,21 @@ Pretrained 된 BART 모델은 영어를 학습했을터, 논문에서 마냥 체
 - <u>추가된 Encoder</u>와 <u>BART Positional embedding</u>, 그리고 <u>self attention input projection matrix of BART's encoder first layer</u>만 학습
 - 후에 모든 파라미터를 조금만 학습.  
 - (여기에서 말하는 Positional embedding은 )
-```
+```{.python}
+# Attention is all you need에서의 positional encoding
+'''
+PE(pos,2*i)=sin(pos/10000**(2*i/d_model))
+PE(pos,2*i+1)=cos(pos/10000**((2*i+1)/d_model))
+이때 pos는 seq len에서의 위치이고, d_model은 model의 크기, 2i, 2i+1에 들어가는 것은 각 dim임(0~d_model)
+'''
+position = torch.arange(0, max_len).unsqueeze(1) # max_len,1
+div_term = 10000**(torch.arange(0,d_model)/d_model).unsqueeze(0) # 1, d_model
+pe = position / div_term
+pe[:, 0::2] = torch.sin(pe[:, 0::2])
+pe[:, 1::2] = torch.cos(pe[:, 1::2])
+
+# BART positional embedding은 말그대로 max len과 d_model 간의 nn.Embedding
+positional_embedding  = nn.Embedding((max_len,d_model)) # 이런식
 ```
 
 # Comparison with other models  
@@ -90,14 +101,35 @@ Masked Language Model: BERT(15% Mask 씌우고, 각각의 MASK를 independent하
 Multitask Masked Language Model: UniLM  
 Masked Seq-to-Seq: MASS  
 - Permuted Language LM, Masked LM, Multitask Masked LM -> 2 stream attention을 활용함.(XLNET은 알겠다만, BERT는?)      
-(comment : UniLM과 MASS에 대해선 컨셉은 파악해야겠음)  
+_(comment : UniLM과 MASS에 대해선 컨셉은 파악해야겠음)_
 실험 방식)  
-1) 
+
 # Task 
 - SQuAD : Extractive QA task  
 - MNLI : Bitext Classification task (두 문장의 의미적인 관계 분류)  - ELI5 : Abstractive summary task
 - Xsum : Abstractive summary task
 - ConvAI2 : Persona를 활용한 대화 생성
 - CNN/DM : 뉴스 요약 task.  
+크게 정리하면, Descriminative & Generation Task로 구성.  
+
 # Results  
-https://dladustn95.github.io/assets/images/bart_figure7.png
+![4](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/table1.png)  
+1) Performance of pre-training methods varies significantly across tasks.
+2) Token masking is crucial
+3) Left to right pretraining improves generation
+4) Bidirectional encoders are crucial for SQuAD
+5) The pretraining objective is not the only important factor  
+  - 본 논문에선 XLNet과는 조금 다르게, relative position embedding 또는 segment level recurrunce를 빼줌(즉, 모델의 architecture도 중요하다..)  
+6) Pure language models perform best on ELI5.
+  - ELI5가 outlier라고 칭하고 있음.  
+In conclusion : BART achieves the most consistently strong performance.  
+
+# Large scale Pretraining Experiments  
+12 layers for encoder and decoder, hidden size 1024, Batch size : 8000(부럽다), train 500,000 steps  
+GPT2와 유사하게 BPE Encoding을 활용함. Text infilling과 sentence permutation을 함. 30%의 tokens를 MASK.  
+마지막 10%의 training step에서는 drop out을 안하게함.  
+dataset : 160GB의 news, books, stories and web text.  
+![4](https://github.com/Chuck2Win/Paper_Review/blob/master/BART/table2.png)  
+
+# Conclusion  
+Discriminative 에서 RoBerTa와 유사한 성능을 냈고, generation task에서는 sota 성능을 달성하였음  
